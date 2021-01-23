@@ -20,6 +20,7 @@ def main():
     cf = CFStats(settings.token)
     zones = cf.zones()
 
+    # Week of data.
     start_date = now_iso8601_time(0)[0:10]
     end_date = now_iso8601_time(7 * 24)[0:10]
     

@@ -33,7 +33,16 @@ class CFStats:
         https://developers.cloudflare.com/analytics/migration-guides/zone-analytics
 
         But with the following removed:
-        * threats (we're a static site, don't care about random scrappers)
+        * threats. we're a static site, don't care about random scrappers.
+        * SSL. Really not that interesting to know the 90% is TLSv1.3
+        * ipclassmap. it's mostly unknown / no record.
+
+        But for what we do include:
+        * Browser Usage Stats
+        * Requests per country.
+        * cached / vs non cached requests.
+        * Content types being requested.
+        * Status code info
         """
         query="""
         query {
@@ -42,21 +51,22 @@ class CFStats:
                     httpRequests1dGroups(limit: %i, filter:{date_lt: "%s", date_gt: "%s"}) {
                         dimensions { date }
                         sum {
+                            pageViews
+                            bytes
+                            requests
+
+                            cachedBytes
+                            cachedRequests
+
                             browserMap {
                                 pageViews
                                 uaBrowserFamily
                             }
-                            bytes
-                            cachedBytes
-                            cachedRequests
+              
                             contentTypeMap {
                                 bytes
                                 requests
                                 edgeResponseContentTypeName
-                            }
-                            clientSSLMap {
-                                requests
-                                clientSSLProtocol
                             }
                             countryMap {
                                 bytes
@@ -64,27 +74,18 @@ class CFStats:
                                 threats
                                 clientCountryName
                             }
-                            encryptedBytes
-                            encryptedRequests
-                            ipClassMap {
-                                requests
-                                ipType
-                            }
-                            pageViews
-                            requests
+
                             responseStatusMap {
                                 requests
                                 edgeResponseStatus
                             }
                         }
-                        uniq {
-                            uniques
-                        }
-      
                     }
                 }
             }
         }
         """ % (zone_id, limit, start_date, end_date)
         r = self.cf.graphql.post(data={'query':query})
-        return r
+        # Skipping the API filler stuff
+        # Only 1 zone would be included, so zero indexing should be fine.
+        return r['data']['viewer']['zones'][0]['httpRequests1dGroups']
