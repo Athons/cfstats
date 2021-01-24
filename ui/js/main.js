@@ -87,12 +87,13 @@ function bytesToMB(x) {
 }
 
 function setupGraphs(data) {
-  console.log(data)
-  graph('pageViewsChart', 'Page Views', data['views']);
-  graph('requestsChart', 'Requests', data['requests']);
-  graph('bytesChart', 'Bytes Transfered (in MB)', data['bytes'], bytesToMB);
-  graph('cachedBytesChart', 'Cached Bytes Ratio', data['bytes_ratio']);
-  graph('cachedRequestsChart', 'Cached Requests Ratio', data['requests_ratio']);
+  // 
+  let zone = data['athon.uk'];
+  graph('pageViewsChart', 'Page Views', zone['views']);
+  graph('requestsChart', 'Requests', zone['requests']);
+  graph('bytesChart', 'Bytes Transfered (in MB)', zone['bytes'], bytesToMB);
+  graph('cachedBytesChart', 'Cached Bytes Ratio', zone['bytes_ratio']);
+  graph('cachedRequestsChart', 'Cached Requests Ratio', zone['requests_ratio']);
 }
 
 function main() {

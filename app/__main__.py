@@ -24,24 +24,26 @@ def main():
 
     # Week of data.
     start_date = now_iso8601_time(0)[0:10]
-    end_date = now_iso8601_time(7 * 24)[0:10]
+    end_date = now_iso8601_time(30 * 24)[0:10]
     
-    data = []
+    result = {}
     for zone in zones:
         res = cf.stats(
             zone['id'],
             start_date,
             end_date
         )
-        data = json.dumps(CFProcess(res).all())
+        result[zone['name']] = CFProcess(res).all()
+        
+        # Commented out, but if you are doing debugging and want a file saved
+        # locally, here you go:
+        #
+        # f = open('samples/{}-{}_{}.json'.format(
+        #           zone['id'], start_date, end_date), 'w')
+        # f.write(data)
+        # f.close()
 
-        print(data)
-        #f = open('samples/{}-{}_{}.json'.format(
-        #    zone['id'],
-        #    start_date,
-        #    end_date), 'w')
-        #f.write(data)
-        #f.close()
+    print(json.dumps(result))
 
 if __name__ == "__main__":
     main()
