@@ -5,6 +5,8 @@ import pytz
 import json
 
 from CFStats import CFStats
+from CFProcess import CFProcess
+
 import settings
 
 def now_iso8601_time(h_delta):
@@ -31,13 +33,15 @@ def main():
             start_date,
             end_date
         )
-        data = json.dumps(res)
-        f = open('samples/{}-{}_{}.json'.format(
-            zone['id'],
-            start_date,
-            end_date), 'w')
-        f.write(data)
-        f.close()
+        data = json.dumps(CFProcess(res).all())
+
+        print(data)
+        #f = open('samples/{}-{}_{}.json'.format(
+        #    zone['id'],
+        #    start_date,
+        #    end_date), 'w')
+        #f.write(data)
+        #f.close()
 
 if __name__ == "__main__":
     main()

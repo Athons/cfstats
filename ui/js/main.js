@@ -1,3 +1,7 @@
+//const DATA_URL = 'https://external_url_here/data.json'
+// For local dev:
+const DATA_URL = './data.json'
+
 window.chartColors = {
   pink: 'hsla(340, 82%, 52%, 0.75)',
   red: 'rgba(255, 99, 132, 0.75)',
@@ -41,7 +45,7 @@ function graph(element, title, data, unitf=x => x) {
 
   console.log(datasets);
   var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: dates,
       datasets: datasets
@@ -73,7 +77,7 @@ function graph(element, title, data, unitf=x => x) {
 
 
 function getData() {
-  fetch('./data.json')
+  fetch(DATA_URL)
     .then(response => response.json())
     .then(data => setupGraphs(data));
 }
