@@ -1,0 +1,45 @@
+<p><link rel="stylesheet" href="css/splendor.min.css"></p>
+
+<script src="./js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<h1>Athon stats!</h1>
+
+<p>This are directly fetched from the cloudflare API and might be a little
+inaccurate (from bots to vpns, etc)</p>
+
+<p>This page is built from the code in
+<a href="https://github.com/athons/cfstats">athons/cfstats</a>, which uses:</p>
+
+<ul>
+<li>CF data fetching is done in Python</li>
+<li>Graphs made with <a href="https://www.chartjs.org/docs/latest/">Chart.js</a></li>
+<li>CSS theme is <a href="https://github.com/markdowncss/splendor">Splendor</a></li>
+</ul>
+
+<p>Check the code out if this sort of thing interests you, and feel free to submit
+patches to make improvements!</p>
+
+<h2>Data</h2>
+
+<p>Data is collected by a script which reads the last weeks worth of data, daily.</p>
+
+<p>We present the data from yesterday, as today isn't over and would show lower
+numbers compared to the rest!</p>
+
+<h3>Page Views</h3>
+
+<p><canvas id="pageViewsChart" width="400" height="200"></canvas></p>
+
+<h3>Requests</h3>
+
+<p><canvas id="requestsChart" width="400" height="200"></canvas></p>
+
+<h3>Bytes Transfered</h3>
+
+<p><canvas id="bytesChart" width="400" height="200"></canvas></p>
+
+<h3>Cached Response and byte ratios</h3>
+
+<p><canvas id="cachedChart" width="400" height="200"></canvas></p>
