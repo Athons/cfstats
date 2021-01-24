@@ -89,6 +89,7 @@ function bytesToMB(x) {
 function setupGraphs(data) {
   // 
   let zone = data['athon.uk'];
+  graph('uniqueChart', 'Unique Visitors', zone['unique_visitors']);
   graph('pageViewsChart', 'Page Views', zone['views']);
   graph('requestsChart', 'Requests', zone['requests']);
   graph('bytesChart', 'Bytes Transfered (in MB)', zone['bytes'], bytesToMB);

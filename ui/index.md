@@ -14,6 +14,10 @@ Data is collected by a script which reads the last 30 days worth of data, daily.
 We present the data from yesterday, as today isn't over and would show lower
 numbers compared to the rest!
 
+### Unique Visitors
+
+<canvas id="uniqueChart" width="400" height="200"></canvas>
+
 ### Page Views
 
 <canvas id="pageViewsChart" width="400" height="200"></canvas>

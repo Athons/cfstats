@@ -80,6 +80,10 @@ class CFStats:
                                 edgeResponseStatus
                             }
                         }
+
+                        uniq {
+                            uniques
+                        }
                     }
                 }
             }

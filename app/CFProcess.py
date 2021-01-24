@@ -14,7 +14,7 @@ class CFProcess:
         Gets information on the page views, as reported by cloudflare.
         """
         return self._internal_read(
-            lambda date, x: {
+            lambda date, x, _: {
                 'date': date,
                 'pageViews': x['pageViews']
             }
@@ -22,7 +22,7 @@ class CFProcess:
 
     def requests(self):
         return self._internal_read(
-            lambda date, x: {
+            lambda date, x, _: {
                 'date': date,
                 'requests': x['requests'],
                 'cachedRequests': x['cachedRequests']
@@ -34,7 +34,7 @@ class CFProcess:
         Gets information on total bytes transfered.
         """
         return self._internal_read(
-            lambda date, x: {
+            lambda date, x, _: {
                 'date': date,
                 'bytes': x['bytes'],
                 'cachedBytes': x['cachedBytes']
@@ -43,19 +43,25 @@ class CFProcess:
 
     def requests_ratio(self):
         return self._internal_read(
-            lambda date, x: {
+            lambda date, x, _: {
                 'date': date,
                 'requestRatio': float(x['cachedRequests']) / x['requests']
             }
         )
 
-
-
     def bytes_ratio(self):
         return self._internal_read(
-            lambda date, x: {
+            lambda date, x, _: {
                 'date': date,
                 'bytesRatio':  float(x['cachedBytes']) / x['bytes'],
+            }
+        )
+
+    def unique_visitors(self):
+        return self._internal_read(
+            lambda date, x, i: {
+                'date': date,
+                'unique_visitors': i['uniq']['uniques'],
             }
         )
 
@@ -68,7 +74,7 @@ class CFProcess:
             x = i['sum']
             date = i['dimensions']['date']
             res.append(
-                f(date, x)
+                f(date, x, i)
             )
         return res
     
@@ -79,6 +85,7 @@ class CFProcess:
             'views': self.views(),
             'bytes_ratio': self.bytes_ratio(),
             'requests_ratio': self.requests_ratio(),
+            'unique_visitors': self.unique_visitors()
         }
 
 
