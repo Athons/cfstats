@@ -46,8 +46,8 @@ class CFProcess:
             lambda date, x: {
                 'date': date,
                 # Believe this is correct
-                'bytesRatio':  x['cachedBytes'] / x['bytes'],
-                'requestRatio': x['cachedRequests'] / x['requests']
+                'bytesRatio':  float(x['cachedBytes']) / x['bytes'],
+                'requestRatio': float(x['cachedRequests']) / x['requests']
             }
         )
 
@@ -76,4 +76,4 @@ class CFProcess:
 if __name__ == "__main__":
     file = json.load(open(sys.argv[1], 'r'))
     cf = CFProcess(file)
-    print(cf.all())
+    print(json.dumps(cf.all()))
