@@ -41,13 +41,21 @@ class CFProcess:
             }
         )
 
-    def ratio(self):
+    def requests_ratio(self):
         return self._internal_read(
             lambda date, x: {
                 'date': date,
-                # Believe this is correct
-                'bytesRatio':  float(x['cachedBytes']) / x['bytes'],
                 'requestRatio': float(x['cachedRequests']) / x['requests']
+            }
+        )
+
+
+
+    def bytes_ratio(self):
+        return self._internal_read(
+            lambda date, x: {
+                'date': date,
+                'bytesRatio':  float(x['cachedBytes']) / x['bytes'],
             }
         )
 
@@ -69,7 +77,8 @@ class CFProcess:
             'bytes': cf.bytes(),
             'requests': cf.requests(),
             'views': cf.views(),
-            'ratio': cf.ratio()
+            'bytes_ratio': cf.bytes_ratio(),
+            'requests_ratio': cf.requests_ratio(),
         }
 
 

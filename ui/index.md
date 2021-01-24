@@ -7,16 +7,6 @@
 This are directly fetched from the cloudflare API and might be a little
 inaccurate (from bots to vpns, etc)
 
-This page is built from the code in
-[athons/cfstats](https://github.com/athons/cfstats), which uses:
-
-* CF data fetching is done in Python
-* Graphs made with [Chart.js](https://www.chartjs.org/docs/latest/)
-* CSS theme is [Splendor](https://github.com/markdowncss/splendor)
-
-Check the code out if this sort of thing interests you, and feel free to submit
-patches to make improvements!
-
 ## Data
 
 Data is collected by a script which reads the last weeks worth of data, daily.
@@ -36,6 +26,20 @@ numbers compared to the rest!
 
 <canvas id="bytesChart" width="400" height="200"></canvas>
 
-### Cached Response and byte ratios
+### Cached Response and Byte Ratios
 
-<canvas id="cachedChart" width="400" height="200"></canvas>
+<canvas id="cachedRequestsChart" width="400" height="200"></canvas>
+
+<canvas id="cachedBytesChart" width="400" height="200"></canvas>
+
+## Tech Details
+
+This page is built from the code in
+[athons/cfstats](https://github.com/athons/cfstats), which uses:
+
+* Python for talking to the Cloudflare API and downloading the data.
+* [Chart.js](https://www.chartjs.org/docs/latest/) for Graphs
+* [Splendor](https://github.com/markdowncss/splendor) for some nice default CSS
+
+Check the code out if this sort of thing interests you, and feel free to submit
+patches to make improvements!
