@@ -4,12 +4,12 @@
 
 # Athon stats!
 
-This are directly fetched from the cloudflare API and might be a little
-inaccurate (from bots to vpns, etc)
+These are directly fetched from the cloudflare API and might be a little
+inaccurate (from bots to vpns, etc).
 
 ## Data
 
-Data is collected by a script which reads the last weeks worth of data, daily.
+Data is collected by a script which reads the last 30 days worth of data, daily.
 
 We present the data from yesterday, as today isn't over and would show lower
 numbers compared to the rest!
