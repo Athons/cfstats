@@ -1,0 +1,41 @@
+name: Update Stats
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+    # Run at four am UTC, as that's probably a reasonable time.
+  workflow_dispatch:
+
+jobs:
+  build:
+    # grant access to the CF_TOKEN env variable.
+    environment: ci
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Generate data
+      env:
+        CF_TOKEN: ${{ secrets.CF_TOKEN }}
+      run: |
+        python app > data.json
+    - name: Setup - gcloud / gsutil
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GCLOUD_IAM_KEY }}
+        project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+        
+        export_default_credentials: true
+    - name: Deploy Data
+      env:
+        GCLOUD_BUCKET: ${{ secrets.GCLOUD_BUCKET  }}
+      run: |-
+        gsutil cp data.json gs://$GCLOUD_BUCKET
