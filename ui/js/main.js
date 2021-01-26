@@ -1,6 +1,6 @@
-//const DATA_URL = 'https://external_url_here/data.json'
+const DATA_URL = 'https://athon-uk.storage.googleapis.com/data.json';
 // For local dev:
-const DATA_URL = './data.json'
+//const DATA_URL = './data.json'
 
 window.chartColors = {
   pink: 'hsla(340, 82%, 52%, 0.75)',
@@ -77,7 +77,10 @@ function graph(element, title, data, unitf=x => x) {
 
 
 function getData() {
-  fetch(DATA_URL)
+  fetch(DATA_URL, {
+      method: 'GET',
+      mode: 'cors',
+    })
     .then(response => response.json())
     .then(data => setupGraphs(data));
 }

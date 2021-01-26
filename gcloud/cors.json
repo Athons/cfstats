@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://stats.athon.uk", "http://localhost:8000"],
+      "method": ["GET"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]
