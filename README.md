@@ -1,3 +1,5 @@
+https://github.com/Athons/cfstats/workflows/Update%20Stats/badge.svg
+
 # cfstats
 
 Fetching our cloudflare stats and making them public!
