@@ -1,4 +1,4 @@
-https://github.com/Athons/cfstats/workflows/Update%20Stats/badge.svg
+![CI Status](https://github.com/Athons/cfstats/workflows/Update%20Stats/badge.svg)
 
 # cfstats
 
